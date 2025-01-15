@@ -2,6 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { Founder } from "@/components/Founder";
+import { AboutUs } from "@/components/AboutUs";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -15,6 +16,7 @@ const Index = () => {
           transition={{ duration: 0.5 }}
         >
           <Hero />
+          <AboutUs />
           <Features />
           <Founder />
         </motion.div>

@@ -1,131 +1,68 @@
-import { Menu, X, LogOut, LogIn } from "lucide-react";
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { useMobile } from "@/hooks/use-mobile";
 
 export const Navbar = () => {
+  const isMobile = useMobile();
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-  const { toast } = useToast();
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to sign out. Please try again.",
-      });
-    } else {
-      navigate("/auth");
-    }
-  };
-
-  const menuItems = [
-    { name: "Skills Development", path: "/skills" },
-    { name: "Voter Education", path: "/voter-education" },
-    { name: "Community", path: "/community" },
-    { name: "Events", path: "/events" },
-    { name: "Volunteer", path: "/volunteer" },
+  const links = [
+    { href: "/", label: "Home" },
+    { href: "/skills", label: "Skills" },
+    { href: "/voter-education", label: "Voter Education" },
+    { href: "/community", label: "Community" },
+    { href: "/events", label: "Events" },
+    { href: "/volunteer", label: "Volunteer" },
   ];
 
+  const NavLinks = () => (
+    <>
+      {links.map((link) => (
+        <Link
+          key={link.href}
+          to={link.href}
+          className="text-gray-700 hover:text-primary transition-colors"
+        >
+          {link.label}
+        </Link>
+      ))}
+    </>
+  );
+
   return (
-    <nav className="bg-primary text-white py-4 fixed w-full top-0 z-50">
+    <nav className="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold">
-            YouthVote2027
+        <div className="flex items-center justify-between h-16">
+          <Link to="/" className="flex items-center space-x-2">
+            <img
+              src="/lovable-uploads/dae13ff5-af55-4fa8-9eec-e71ce9d09d28.png"
+              alt="YouthVote Logo"
+              className="h-12 w-auto"
+            />
           </Link>
 
-          <button
-            onClick={toggleMenu}
-            className="md:hidden text-white focus:outline-none"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-
-          <div className="hidden md:flex items-center space-x-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className="hover:text-accent transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
-            {user ? (
-              <Button
-                variant="ghost"
-                className="text-white hover:text-accent"
-                onClick={handleLogout}
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </Button>
-            ) : (
-              <Button
-                variant="ghost"
-                className="text-white hover:text-accent"
-                onClick={() => navigate("/auth")}
-              >
-                <LogIn className="mr-2 h-4 w-4" />
-                Login
-              </Button>
-            )}
-          </div>
+          {isMobile ? (
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent>
+                <div className="flex flex-col space-y-4 mt-8">
+                  <NavLinks />
+                </div>
+              </SheetContent>
+            </Sheet>
+          ) : (
+            <div className="flex items-center space-x-8">
+              <NavLinks />
+            </div>
+          )}
         </div>
-
-        {isOpen && (
-          <div className="md:hidden mt-4 animate-fade-in">
-            {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className="block py-2 hover:text-accent transition-colors"
-                onClick={toggleMenu}
-              >
-                {item.name}
-              </Link>
-            ))}
-            {user ? (
-              <Button
-                variant="ghost"
-                className="text-white hover:text-accent w-full text-left"
-                onClick={handleLogout}
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </Button>
-            ) : (
-              <Button
-                variant="ghost"
-                className="text-white hover:text-accent w-full text-left"
-                onClick={() => navigate("/auth")}
-              >
-                <LogIn className="mr-2 h-4 w-4" />
-                Login
-              </Button>
-            )}
-          </div>
-        )}
       </div>
     </nav>
   );
