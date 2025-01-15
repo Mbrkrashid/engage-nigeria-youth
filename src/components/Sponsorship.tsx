@@ -21,7 +21,11 @@ export const Sponsorship = () => {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.from("sponsorships").insert([formData]);
+      const { error } = await supabase.from("sponsorships").insert([{
+        ...formData,
+        amount: Number(formData.amount),
+        status: 'pending'
+      }]);
 
       if (error) throw error;
 

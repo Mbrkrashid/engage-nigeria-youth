@@ -61,14 +61,12 @@ export const AdminDashboard = () => {
 
       if (uploadError) throw uploadError;
 
-      const { error: dbError } = await supabase.from("media").insert([
-        {
-          title: formData.title,
-          description: formData.description,
-          media_type: formData.media_type,
-          url: filePath,
-        },
-      ]);
+      const { error: dbError } = await supabase.from("media").insert([{
+        title: formData.title,
+        description: formData.description,
+        media_type: formData.media_type,
+        url: filePath,
+      }]);
 
       if (dbError) throw dbError;
 
