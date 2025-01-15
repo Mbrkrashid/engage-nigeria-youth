@@ -7,6 +7,24 @@ import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 
+const volunteerSkills = [
+  "Campaign strategy and planning",
+  "Social media activism",
+  "Community organizing",
+  "Public speaking",
+  "Digital marketing",
+  "Web development",
+  "Data analysis",
+  "Photography",
+  "Videography",
+  "Graphic design",
+  "Leadership training",
+  "Civic education",
+  "Event planning",
+  "Fundraising",
+  "Research",
+];
+
 export const VolunteerForm = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -17,6 +35,7 @@ export const VolunteerForm = () => {
     phone: "",
     skills: "",
     availability: "",
+    areas_of_interest: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -122,8 +141,25 @@ export const VolunteerForm = () => {
             name="skills"
             value={formData.skills}
             onChange={handleChange}
-            placeholder="e.g., Teaching, Public Speaking, Social Media"
+            placeholder="Select from: Campaign strategy, Social media, Web development, etc."
             required
+            className="w-full"
+          />
+          <div className="mt-2 text-sm text-gray-500">
+            Available skills: {volunteerSkills.join(", ")}
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="areas_of_interest" className="block text-sm font-medium mb-2">
+            Areas of Interest
+          </label>
+          <Textarea
+            id="areas_of_interest"
+            name="areas_of_interest"
+            value={formData.areas_of_interest}
+            onChange={handleChange}
+            placeholder="What areas would you like to contribute to?"
             className="w-full"
           />
         </div>

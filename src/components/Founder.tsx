@@ -13,15 +13,15 @@ export const Founder = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">Our Vision</h2>
           <div className="bg-white rounded-lg shadow-xl p-8">
             <img
-              src="/placeholder.svg"
-              alt="Founder"
+              src="/lovable-uploads/110d24a9-d8d2-4f1f-882e-0d8be05ca020.png"
+              alt="Mubarak Sani Rashid"
               className="w-32 h-32 rounded-full mx-auto mb-6 object-cover"
             />
-            <h3 className="text-2xl font-semibold mb-4">John Doe</h3>
+            <h3 className="text-2xl font-semibold mb-4">Mubarak Sani Rashid</h3>
             <p className="text-gray-600 mb-6">
               "Our mission is to empower the youth of Northern Nigeria with the skills,
               knowledge, and opportunities they need to create positive change in their
-              communities."
+              communities through active participation in the democratic process."
             </p>
             <div className="flex justify-center space-x-4">
               <a href="#" className="text-primary hover:text-primary/80">
