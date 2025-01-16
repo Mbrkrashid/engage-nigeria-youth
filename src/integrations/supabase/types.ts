@@ -57,66 +57,6 @@ export type Database = {
         }
         Relationships: []
       }
-      media: {
-        Row: {
-          created_at: string
-          description: string | null
-          id: string
-          media_type: string
-          title: string
-          updated_at: string
-          url: string
-        }
-        Insert: {
-          created_at?: string
-          description?: string | null
-          id?: string
-          media_type: string
-          title: string
-          updated_at?: string
-          url: string
-        }
-        Update: {
-          created_at?: string
-          description?: string | null
-          id?: string
-          media_type?: string
-          title?: string
-          updated_at?: string
-          url?: string
-        }
-        Relationships: []
-      }
-      sponsorships: {
-        Row: {
-          amount: number
-          created_at: string
-          id: string
-          message: string | null
-          sponsor_email: string | null
-          sponsor_name: string | null
-          status: string | null
-        }
-        Insert: {
-          amount: number
-          created_at?: string
-          id?: string
-          message?: string | null
-          sponsor_email?: string | null
-          sponsor_name?: string | null
-          status?: string | null
-        }
-        Update: {
-          amount?: number
-          created_at?: string
-          id?: string
-          message?: string | null
-          sponsor_email?: string | null
-          sponsor_name?: string | null
-          status?: string | null
-        }
-        Relationships: []
-      }
       donations: {
         Row: {
           amount: number
@@ -144,6 +84,36 @@ export type Database = {
           id?: string
           payment_method?: string
           payment_status?: string
+        }
+        Relationships: []
+      }
+      media: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          media_type: string
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          media_type: string
+          title: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          media_type?: string
+          title?: string
+          updated_at?: string
+          url?: string
         }
         Relationships: []
       }
@@ -224,6 +194,36 @@ export type Database = {
         }
         Relationships: []
       }
+      sponsorships: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          message: string | null
+          sponsor_email: string | null
+          sponsor_name: string | null
+          status: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          message?: string | null
+          sponsor_email?: string | null
+          sponsor_name?: string | null
+          status?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          message?: string | null
+          sponsor_email?: string | null
+          sponsor_name?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
       volunteers: {
         Row: {
           availability: string | null
@@ -248,9 +248,9 @@ export type Database = {
         Update: {
           availability?: string | null
           created_at?: string
-          email: string
-          full_name: string
-          id: string
+          email?: string
+          full_name?: string
+          id?: string
           phone?: string | null
           skills?: string[] | null
           user_id?: string | null
@@ -282,7 +282,7 @@ export type Tables<
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
         Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never,
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
