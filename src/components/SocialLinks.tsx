@@ -1,6 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Facebook, Instagram, Twitter, TikTok } from "lucide-react";
+import { Facebook, Instagram, Twitter } from "lucide-react";
+
+const TikTokIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="w-5 h-5"
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
 
 export const SocialLinks = () => {
   const socialLinks = [
@@ -21,7 +38,7 @@ export const SocialLinks = () => {
     },
     {
       name: "TikTok",
-      icon: <TikTok className="w-5 h-5" />,
+      icon: <TikTokIcon />,
       url: "#", // Replace with your TikTok URL
     },
   ];
