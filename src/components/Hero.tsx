@@ -1,19 +1,64 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export const Hero = () => {
   return (
-    <div className="bg-gradient-to-r from-primary to-primary/90 text-white min-h-[80vh] flex items-center">
-      <div className="container mx-auto px-4">
+    <div className="bg-gradient-to-r from-primary to-primary/90 text-white min-h-[80vh] flex items-center relative overflow-hidden">
+      {/* Animated background elements */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+      >
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-20 h-20 bg-white/10 rounded-full"
+            initial={{
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              x: [0, Math.random() * 40 - 20, 0],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.2,
+            }}
+          />
+        ))}
+      </motion.div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-6xl font-bold mb-6"
+          >
             Empowering Youth for a Better Nigeria
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 animate-fade-in opacity-90">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl md:text-2xl mb-8 opacity-90"
+          >
             Join the movement to build skills, understand your voting rights, and
             create positive change for Northern Nigeria's future.
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center animate-fade-in">
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col md:flex-row gap-4 justify-center"
+          >
             <Button
               asChild
               className="bg-secondary hover:bg-secondary/90 text-white px-8 py-6 text-lg"
@@ -26,7 +71,7 @@ export const Hero = () => {
             >
               <Link to="/skills">Explore Skills</Link>
             </Button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

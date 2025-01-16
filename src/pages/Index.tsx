@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
+import { Gallery } from "@/components/Gallery";
 import { Founder } from "@/components/Founder";
 import { AboutUs } from "@/components/AboutUs";
 import { motion } from "framer-motion";
@@ -18,6 +19,7 @@ const Index = () => {
           <Hero />
           <AboutUs />
           <Features />
+          <Gallery />
           <Founder />
         </motion.div>
       </main>
