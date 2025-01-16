@@ -4,6 +4,9 @@ import { Features } from "@/components/Features";
 import { Gallery } from "@/components/Gallery";
 import { Founder } from "@/components/Founder";
 import { AboutUs } from "@/components/AboutUs";
+import { SocialLinks } from "@/components/SocialLinks";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { DonateButton } from "@/components/DonateButton";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -21,6 +24,8 @@ const Index = () => {
           <Features />
           <Gallery />
           <Founder />
+          <SocialLinks />
+          <WhatsAppButton />
         </motion.div>
       </main>
     </div>
