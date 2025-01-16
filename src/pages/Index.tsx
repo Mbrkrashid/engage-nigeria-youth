@@ -7,6 +7,7 @@ import { AboutUs } from "@/components/AboutUs";
 import { SocialLinks } from "@/components/SocialLinks";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { DonateButton } from "@/components/DonateButton";
+import { GoogleForm } from "@/components/GoogleForm";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -23,9 +24,11 @@ const Index = () => {
           <AboutUs />
           <Features />
           <Gallery />
+          <GoogleForm />
           <Founder />
           <SocialLinks />
           <WhatsAppButton />
+          <DonateButton />
         </motion.div>
       </main>
     </div>
