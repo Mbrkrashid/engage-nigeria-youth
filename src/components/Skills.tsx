@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { GoogleForm } from "@/components/GoogleForm";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const skillCategories = [
   {
@@ -24,7 +26,6 @@ const skillCategories = [
       "Governance and policy analysis",
     ],
   },
-  // ... Add other categories
 ];
 
 export const Skills = () => {
@@ -37,32 +38,48 @@ export const Skills = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-primary">
           Available Skills Programs
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow"
-            >
-              <h3 className="text-xl font-semibold mb-4 text-primary">{category.title}</h3>
-              <ul className="space-y-2 mb-6">
-                {category.skills.map((skill) => (
-                  <li key={skill} className="text-gray-600">
-                    • {skill}
-                  </li>
-                ))}
-              </ul>
-              <Button
-                onClick={() => navigate(`/register/${encodeURIComponent(category.title)}`)}
-                className="w-full"
-              >
-                Register for Program
-              </Button>
-            </motion.div>
-          ))}
-        </div>
+        
+        <Tabs defaultValue="programs" className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="programs">Programs</TabsTrigger>
+            <TabsTrigger value="register">Register</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="programs">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {skillCategories.map((category, index) => (
+                <motion.div
+                  key={category.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow"
+                >
+                  <h3 className="text-xl font-semibold mb-4 text-primary">{category.title}</h3>
+                  <ul className="space-y-2 mb-6">
+                    {category.skills.map((skill) => (
+                      <li key={skill} className="text-gray-600">
+                        • {skill}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    onClick={() => navigate(`/register/${encodeURIComponent(category.title)}`)}
+                    className="w-full"
+                  >
+                    Register for Program
+                  </Button>
+                </motion.div>
+              ))}
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="register">
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <GoogleForm />
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </section>
   );

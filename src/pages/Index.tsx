@@ -6,7 +6,6 @@ import { Founder } from "@/components/Founder";
 import { SocialLinks } from "@/components/SocialLinks";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { DonateButton } from "@/components/DonateButton";
-import { GoogleForm } from "@/components/GoogleForm";
 import { ChatSupport } from "@/components/ChatSupport";
 import { YouthIllustration } from "@/components/YouthIllustration";
 import { motion } from "framer-motion";
@@ -25,7 +24,6 @@ const Index = () => {
           <AboutUs />
           <Features />
           <Gallery />
-          <GoogleForm />
           <Founder />
           <SocialLinks />
           <WhatsAppButton />
