@@ -6,10 +6,13 @@ import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 export const AdminDashboard = () => {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [mediaList, setMediaList] = useState<any[]>([]);
   const [events, setEvents] = useState<any[]>([]);
   const [voterEducation, setVoterEducation] = useState<any[]>([]);
@@ -40,10 +43,42 @@ export const AdminDashboard = () => {
   });
 
   useEffect(() => {
-    fetchMedia();
-    fetchEvents();
-    fetchVoterEducation();
+    checkAdminStatus();
   }, []);
+
+  const checkAdminStatus = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        navigate('/auth');
+        return;
+      }
+
+      const { data: adminData } = await supabase
+        .from('admin_users')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+
+      if (!adminData) {
+        toast({
+          variant: "destructive",
+          title: "Unauthorized",
+          description: "You don't have permission to access this page.",
+        });
+        navigate('/');
+        return;
+      }
+
+      setIsAdmin(true);
+      fetchMedia();
+      fetchEvents();
+      fetchVoterEducation();
+    } catch (error) {
+      console.error('Error checking admin status:', error);
+      navigate('/');
+    }
+  };
 
   const fetchMedia = async () => {
     const { data, error } = await supabase
@@ -98,6 +133,15 @@ export const AdminDashboard = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isAdmin) {
+      toast({
+        variant: "destructive",
+        title: "Unauthorized",
+        description: "You don't have permission to perform this action.",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -214,6 +258,10 @@ export const AdminDashboard = () => {
       setIsLoading(false);
     }
   };
+
+  if (!isAdmin) {
+    return null;
+  }
 
   return (
     <div className="max-w-6xl mx-auto p-6">

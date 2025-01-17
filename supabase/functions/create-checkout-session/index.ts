@@ -1,10 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import Stripe from "https://esm.sh/stripe@12.0.0"
 
-const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
-  apiVersion: '2023-10-16',
-})
-
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -16,7 +12,18 @@ serve(async (req) => {
   }
 
   try {
+    const stripeKey = Deno.env.get('STRIPE_SECRET_KEY')
+    if (!stripeKey) {
+      throw new Error('Missing Stripe secret key')
+    }
+
+    const stripe = new Stripe(stripeKey, {
+      apiVersion: '2023-10-16',
+    })
+
     const { amount } = await req.json()
+
+    console.log('Creating checkout session with amount:', amount)
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -37,6 +44,8 @@ serve(async (req) => {
       cancel_url: `${req.headers.get('origin')}`,
     })
 
+    console.log('Checkout session created:', session.id)
+
     return new Response(
       JSON.stringify({ url: session.url }),
       {
@@ -45,6 +54,7 @@ serve(async (req) => {
       },
     )
   } catch (error) {
+    console.error('Error creating checkout session:', error)
     return new Response(
       JSON.stringify({ error: error.message }),
       {
