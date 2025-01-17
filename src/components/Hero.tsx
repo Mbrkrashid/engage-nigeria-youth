@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export const Hero = () => {
   return (
-    <div className="bg-gradient-to-r from-primary to-primary/90 text-white min-h-[80vh] flex items-center relative overflow-hidden">
+    <div className="bg-gradient-to-r from-primary to-primary/90 text-white min-h-[90vh] flex items-center relative overflow-hidden">
       {/* Animated background elements */}
       <motion.div
         className="absolute inset-0"
@@ -12,7 +12,7 @@ export const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
       >
-        {[...Array(5)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-20 h-20 bg-white/10 rounded-full"
@@ -23,6 +23,8 @@ export const Hero = () => {
             animate={{
               y: [0, -20, 0],
               x: [0, Math.random() * 40 - 20, 0],
+              scale: [1, 1.1, 1],
+              opacity: [0.5, 0.8, 0.5],
             }}
             transition={{
               duration: 3 + Math.random() * 2,
@@ -40,7 +42,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl font-bold mb-6"
+            className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
           >
             Empowering Youth for a Better Nigeria
           </motion.h1>
@@ -48,7 +50,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl mb-8 opacity-90"
+            className="text-lg md:text-2xl mb-8 opacity-90 px-4"
           >
             Join the movement to build skills, understand your voting rights, and
             create positive change for Northern Nigeria's future.
@@ -57,17 +59,17 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col md:flex-row gap-4 justify-center"
+            className="flex flex-col md:flex-row gap-4 justify-center px-4"
           >
             <Button
               asChild
-              className="bg-secondary hover:bg-secondary/90 text-white px-8 py-6 text-lg"
+              className="bg-secondary hover:bg-secondary/90 text-white px-8 py-6 text-lg transform hover:scale-105 transition-transform duration-200 shadow-lg"
             >
               <Link to="/volunteer">Become a Volunteer</Link>
             </Button>
             <Button
               asChild
-              className="bg-accent hover:bg-accent/90 text-primary px-8 py-6 text-lg"
+              className="bg-accent hover:bg-accent/90 text-primary px-8 py-6 text-lg transform hover:scale-105 transition-transform duration-200 shadow-lg"
             >
               <Link to="/skills">Explore Skills</Link>
             </Button>

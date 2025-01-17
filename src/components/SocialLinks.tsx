@@ -24,22 +24,22 @@ export const SocialLinks = () => {
     {
       name: "Facebook",
       icon: <Facebook className="w-5 h-5" />,
-      url: "#", // Replace with your Facebook URL
+      url: "#",
     },
     {
       name: "Instagram",
       icon: <Instagram className="w-5 h-5" />,
-      url: "#", // Replace with your Instagram URL
+      url: "#",
     },
     {
       name: "Twitter",
       icon: <Twitter className="w-5 h-5" />,
-      url: "#", // Replace with your Twitter URL
+      url: "#",
     },
     {
       name: "TikTok",
       icon: <TikTokIcon />,
-      url: "#", // Replace with your TikTok URL
+      url: "https://www.tiktok.com/@youthvote2027",
     },
   ];
 
@@ -48,21 +48,28 @@ export const SocialLinks = () => {
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.5, staggerChildren: 0.1 }}
         className="flex flex-col space-y-2"
       >
-        {socialLinks.map((link) => (
-          <Button
+        {socialLinks.map((link, index) => (
+          <motion.div
             key={link.name}
-            variant="outline"
-            size="icon"
-            className="rounded-full hover:bg-primary hover:text-white transition-colors"
-            asChild
+            whileHover={{ scale: 1.1, x: 5 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.1 }}
           >
-            <a href={link.url} target="_blank" rel="noopener noreferrer">
-              {link.icon}
-            </a>
-          </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="rounded-full hover:bg-primary hover:text-white transition-colors shadow-md"
+              asChild
+            >
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
+                {link.icon}
+              </a>
+            </Button>
+          </motion.div>
         ))}
       </motion.div>
     </div>
