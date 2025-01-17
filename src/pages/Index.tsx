@@ -22,12 +22,14 @@ const Index = () => {
           <Hero />
           <YouthIllustration />
           <AboutUs />
+          <div className="fixed bottom-24 right-4 z-50">
+            <DonateButton />
+          </div>
           <Features />
           <Gallery />
           <Founder />
           <SocialLinks />
           <WhatsAppButton />
-          <DonateButton />
           <ChatSupport />
         </motion.div>
       </main>
