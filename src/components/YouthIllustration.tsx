@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { BookOpen, Vote, GraduationCap } from "lucide-react";
+import { BookOpen, Vote, GraduationCap, Users, Heart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export const YouthIllustration = () => {
   return (
@@ -26,7 +28,7 @@ export const YouthIllustration = () => {
               <BookOpen className="w-12 h-12 mx-auto text-primary" />
             </motion.div>
             <h3 className="text-xl font-bold mb-2">Gain Knowledge</h3>
-            <p className="text-gray-600">Access resources and training to understand civic responsibilities</p>
+            <p className="text-gray-600">Access comprehensive resources and training to understand your civic responsibilities and rights</p>
           </motion.div>
 
           {/* Voting Card */}
@@ -45,7 +47,7 @@ export const YouthIllustration = () => {
               <Vote className="w-12 h-12 mx-auto text-secondary" />
             </motion.div>
             <h3 className="text-xl font-bold mb-2">Your Vote Counts</h3>
-            <p className="text-gray-600">Make your voice heard and impact your community's future</p>
+            <p className="text-gray-600">Make your voice heard and impact your community's future through informed voting</p>
           </motion.div>
 
           {/* Capacity Building Card */}
@@ -64,8 +66,30 @@ export const YouthIllustration = () => {
               <GraduationCap className="w-12 h-12 mx-auto text-accent" />
             </motion.div>
             <h3 className="text-xl font-bold mb-2">Capacity Building</h3>
-            <p className="text-gray-600">Develop skills and leadership abilities for community impact</p>
+            <p className="text-gray-600">Develop leadership skills and abilities to create lasting community impact</p>
           </motion.div>
+        </motion.div>
+
+        {/* Support Movement Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="mt-16 text-center"
+        >
+          <h2 className="text-2xl font-bold mb-4">Support Our Movement</h2>
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Join us in empowering youth and building a stronger democracy. Your support makes a difference.
+          </p>
+          <Button
+            asChild
+            className="bg-secondary hover:bg-secondary/90 text-white px-8 py-6 text-lg transform hover:scale-105 transition-transform duration-200"
+          >
+            <Link to="/sponsor">
+              <Heart className="w-5 h-5 mr-2" />
+              Become a Sponsor
+            </Link>
+          </Button>
         </motion.div>
       </div>
     </section>
