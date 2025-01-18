@@ -1,4 +1,3 @@
-<lov-code>
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -185,4 +184,81 @@ export const AdminDashboard = () => {
       console.error("Error uploading media:", error);
       toast({
         variant: "destructive",
-        title: "Error
+        title: "Error",
+        description: "Failed to upload media.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Admin Dashboard</h1>
+      <form onSubmit={handleSubmit}>
+        <Input
+          type="text"
+          placeholder="Title"
+          value={formData.title}
+          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+        />
+        <Textarea
+          placeholder="Description"
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+        />
+        <Input type="file" onChange={handleFileChange} />
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "Uploading..." : "Upload Media"}
+        </Button>
+      </form>
+      <Tabs>
+        <TabsList>
+          <TabsTrigger value="media">Media</TabsTrigger>
+          <TabsTrigger value="events">Events</TabsTrigger>
+          <TabsTrigger value="education">Voter Education</TabsTrigger>
+        </TabsList>
+        <TabsContent value="media">
+          {mediaList.map((media) => (
+            <Card key={media.id}>
+              <CardHeader>
+                <CardTitle>{media.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>{media.description}</p>
+                <img src={media.url} alt={media.title} />
+              </CardContent>
+            </Card>
+          ))}
+        </TabsContent>
+        <TabsContent value="events">
+          {events.map((event) => (
+            <Card key={event.id}>
+              <CardHeader>
+                <CardTitle>{event.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>{event.description}</p>
+                <p>{event.date}</p>
+                <p>{event.location}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </TabsContent>
+        <TabsContent value="education">
+          {voterEducation.map((education) => (
+            <Card key={education.id}>
+              <CardHeader>
+                <CardTitle>{education.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>{education.content}</p>
+                <p>{education.category}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+};
