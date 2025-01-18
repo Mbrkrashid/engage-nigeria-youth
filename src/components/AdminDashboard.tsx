@@ -212,7 +212,7 @@ export const AdminDashboard = () => {
           {isLoading ? "Uploading..." : "Upload Media"}
         </Button>
       </form>
-      <Tabs>
+      <Tabs defaultValue="media">
         <TabsList>
           <TabsTrigger value="media">Media</TabsTrigger>
           <TabsTrigger value="events">Events</TabsTrigger>
