@@ -12,7 +12,7 @@ export const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
       >
-        {[...Array(8)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-20 h-20 bg-white/10 rounded-full"
@@ -21,16 +21,16 @@ export const Hero = () => {
               y: Math.random() * window.innerHeight,
             }}
             animate={{
-              y: [0, -20, 0],
-              x: [0, Math.random() * 40 - 20, 0],
-              scale: [1, 1.1, 1],
+              y: [0, -30, 0],
+              x: [0, Math.random() * 60 - 30, 0],
+              scale: [1, 1.2, 1],
               opacity: [0.5, 0.8, 0.5],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 4 + Math.random() * 2,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: i * 0.2,
+              delay: i * 0.3,
             }}
           />
         ))}

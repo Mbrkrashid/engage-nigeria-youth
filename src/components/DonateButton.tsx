@@ -1,25 +1,35 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
+import { PaystackButton } from "@paystack/inline-js";
 
 export const DonateButton = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleDonation = async () => {
+  const handlePayment = () => {
     setIsLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke('create-checkout-session', {
-        body: { amount: 1000 }, // Default amount in cents
+      const paystack = new PaystackButton();
+      paystack.newTransaction({
+        key: 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', // Replace with your Paystack public key
+        amount: 1000 * 100, // Amount in kobo (10,000 kobo = ₦100)
+        email: 'donor@example.com',
+        currency: 'NGN',
+        ref: `donate_${Math.floor(Math.random() * 1000000000 + 1)}`,
+        callback: (response) => {
+          console.log('Payment successful:', response);
+          toast({
+            title: "Thank you!",
+            description: "Your donation has been received.",
+          });
+        },
+        onClose: () => {
+          console.log('Payment window closed');
+          setIsLoading(false);
+        },
       });
-
-      if (error) throw error;
-
-      if (data?.url) {
-        window.location.href = data.url;
-      }
     } catch (error) {
       console.error('Error:', error);
       toast({
@@ -27,14 +37,13 @@ export const DonateButton = () => {
         title: "Error",
         description: "Failed to process donation. Please try again.",
       });
-    } finally {
       setIsLoading(false);
     }
   };
 
   return (
     <Button
-      onClick={handleDonation}
+      onClick={handlePayment}
       disabled={isLoading}
       className="bg-secondary hover:bg-secondary/90"
     >

@@ -259,6 +259,149 @@ export const AdminDashboard = () => {
     }
   };
 
+  const handleDelete = async (type: 'media' | 'event' | 'education', id: string) => {
+    if (!isAdmin) {
+      toast({
+        variant: "destructive",
+        title: "Unauthorized",
+        description: "You don't have permission to perform this action.",
+      });
+      return;
+    }
+
+    try {
+      let error;
+      switch (type) {
+        case 'media':
+          const mediaItem = mediaList.find(m => m.id === id);
+          if (mediaItem) {
+            const { error: storageError } = await supabase.storage
+              .from('media')
+              .remove([mediaItem.url]);
+            if (storageError) throw storageError;
+          }
+          ({ error } = await supabase.from('media').delete().eq('id', id));
+          if (!error) {
+            setMediaList(mediaList.filter(item => item.id !== id));
+          }
+          break;
+        case 'event':
+          ({ error } = await supabase.from('events').delete().eq('id', id));
+          if (!error) {
+            setEvents(events.filter(event => event.id !== id));
+          }
+          break;
+        case 'education':
+          ({ error } = await supabase.from('voter_education').delete().eq('id', id));
+          if (!error) {
+            setVoterEducation(voterEducation.filter(item => item.id !== id));
+          }
+          break;
+      }
+
+      if (error) throw error;
+
+      toast({
+        title: "Success!",
+        description: "Item deleted successfully.",
+      });
+    } catch (error) {
+      console.error('Error deleting item:', error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to delete item. Please try again.",
+      });
+    }
+  };
+
+  const renderMediaLibrary = () => (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {mediaList.map((media) => (
+        <div key={media.id} className="rounded-lg overflow-hidden shadow-md relative group">
+          {media.media_type === "image" ? (
+            <img
+              src={`${supabase.storage.from("media").getPublicUrl(media.url).data.publicUrl}`}
+              alt={media.title}
+              className="w-full h-48 object-cover"
+            />
+          ) : (
+            <video
+              src={`${supabase.storage.from("media").getPublicUrl(media.url).data.publicUrl}`}
+              className="w-full h-48 object-cover"
+              controls
+            />
+          )}
+          <div className="p-4">
+            <h3 className="font-semibold">{media.title}</h3>
+            <p className="text-sm text-gray-600">{media.description}</p>
+            <Button
+              variant="destructive"
+              size="sm"
+              className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity"
+              onClick={() => handleDelete('media', media.id)}
+            >
+              Delete
+            </Button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const renderEventsList = () => (
+    <div className="grid gap-4">
+      {events.map((event) => (
+        <Card key={event.id}>
+          <CardContent className="p-4">
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="font-semibold">{event.title}</h3>
+                <p className="text-sm text-gray-600">{event.description}</p>
+                <div className="mt-2 text-sm">
+                  <p>Date: {new Date(event.date).toLocaleString()}</p>
+                  <p>Location: {event.location}</p>
+                </div>
+              </div>
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={() => handleDelete('event', event.id)}
+              >
+                Delete
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+
+  const renderVoterEducation = () => (
+    <div className="grid gap-4">
+      {voterEducation.map((content) => (
+        <Card key={content.id}>
+          <CardContent className="p-4">
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="font-semibold">{content.title}</h3>
+                <p className="text-sm text-gray-600">{content.content}</p>
+                <p className="text-sm text-gray-500 mt-2">Category: {content.category}</p>
+              </div>
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={() => handleDelete('education', content.id)}
+              >
+                Delete
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+
   if (!isAdmin) {
     return null;
   }
@@ -343,29 +486,7 @@ export const AdminDashboard = () => {
 
           <div className="mt-8">
             <h2 className="text-xl font-semibold mb-4">Media Library</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {mediaList.map((media) => (
-                <div key={media.id} className="rounded-lg overflow-hidden shadow-md">
-                  {media.media_type === "image" ? (
-                    <img
-                      src={`${supabase.storage.from("media").getPublicUrl(media.url).data.publicUrl}`}
-                      alt={media.title}
-                      className="w-full h-48 object-cover"
-                    />
-                  ) : (
-                    <video
-                      src={`${supabase.storage.from("media").getPublicUrl(media.url).data.publicUrl}`}
-                      className="w-full h-48 object-cover"
-                      controls
-                    />
-                  )}
-                  <div className="p-4">
-                    <h3 className="font-semibold">{media.title}</h3>
-                    <p className="text-sm text-gray-600">{media.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {renderMediaLibrary()}
           </div>
         </TabsContent>
 
@@ -432,20 +553,7 @@ export const AdminDashboard = () => {
 
           <div className="mt-8">
             <h2 className="text-xl font-semibold mb-4">Events List</h2>
-            <div className="grid gap-4">
-              {events.map((event) => (
-                <Card key={event.id}>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold">{event.title}</h3>
-                    <p className="text-sm text-gray-600">{event.description}</p>
-                    <div className="mt-2 text-sm">
-                      <p>Date: {new Date(event.date).toLocaleString()}</p>
-                      <p>Location: {event.location}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            {renderEventsList()}
           </div>
         </TabsContent>
 
@@ -501,17 +609,7 @@ export const AdminDashboard = () => {
 
           <div className="mt-8">
             <h2 className="text-xl font-semibold mb-4">Voter Education Content</h2>
-            <div className="grid gap-4">
-              {voterEducation.map((content) => (
-                <Card key={content.id}>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold">{content.title}</h3>
-                    <p className="text-sm text-gray-600">{content.content}</p>
-                    <p className="text-sm text-gray-500 mt-2">Category: {content.category}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            {renderVoterEducation()}
           </div>
         </TabsContent>
 
