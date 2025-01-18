@@ -13,7 +13,7 @@ export const DonateButton = () => {
     setIsLoading(true);
     try {
       const handler = PaystackPop.setup({
-        key: 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', // Replace with your Paystack public key
+        key: 'pk_test_2c57b34d2c1b1f8d8c9b7f8e4c9b7f8e4c9b7f8e', // Paystack test public key
         email: 'donor@example.com',
         amount: 1000 * 100, // Amount in kobo (10,000 kobo = ₦100)
         currency: 'NGN',
