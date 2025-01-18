@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
+declare const PaystackPop: any;
+
 export const DonateButton = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -16,7 +18,7 @@ export const DonateButton = () => {
         amount: 1000 * 100, // Amount in kobo (10,000 kobo = ₦100)
         currency: 'NGN',
         ref: `donate_${Math.floor(Math.random() * 1000000000 + 1)}`,
-        callback: (response) => {
+        callback: (response: any) => {
           console.log('Payment successful:', response);
           toast({
             title: "Thank you!",
