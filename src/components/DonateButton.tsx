@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 declare const PaystackPop: any;
 
@@ -9,21 +10,41 @@ export const DonateButton = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     setIsLoading(true);
     try {
       const handler = PaystackPop.setup({
-        key: 'pk_live_3ecc35da42e91ff23e4799f3fbf2d8c4c9941c0a',
+        key: 'pk_live_3ecc35da42e91ff23e4799f3fbf2d8c4c9941c0a', // Your Paystack public key
         email: 'donor@example.com',
         amount: 1000 * 100, // Amount in kobo (10,000 kobo = ₦100)
         currency: 'NGN',
         ref: `donate_${Math.floor(Math.random() * 1000000000 + 1)}`,
-        callback: (response: any) => {
+        callback: async (response: any) => {
           console.log('Payment successful:', response);
-          toast({
-            title: "Thank you!",
-            description: "Your donation has been received.",
-          });
+          
+          // Record the donation in the database
+          const { error } = await supabase.from('donations').insert([
+            {
+              amount: 1000,
+              payment_status: 'completed',
+              payment_method: 'paystack',
+              donor_email: 'donor@example.com'
+            }
+          ]);
+
+          if (error) {
+            console.error('Error recording donation:', error);
+            toast({
+              variant: "destructive",
+              title: "Error",
+              description: "Failed to record donation. Please contact support.",
+            });
+          } else {
+            toast({
+              title: "Thank you!",
+              description: "Your donation has been received.",
+            });
+          }
           setIsLoading(false);
         },
         onClose: () => {
