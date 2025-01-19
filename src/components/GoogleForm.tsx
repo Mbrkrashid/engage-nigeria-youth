@@ -1,22 +1,17 @@
-import { motion } from "framer-motion";
-
 export const GoogleForm = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="w-full max-w-4xl mx-auto px-4 py-8"
-    >
-      <div className="aspect-[640/2064] w-full">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLScExQF9XAuS3m1-RmIXYo6ocbV7sE3OKGJvuS_9VRToNdEiYw/viewform?embedded=true"
-          className="w-full h-full border-none"
-          title="Google Form"
-        >
-          Loading…
-        </iframe>
-      </div>
-    </motion.div>
+    <div className="w-full max-w-4xl mx-auto px-4 py-8">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSep9EUEzGVwzXdj4e_ANeFuJ0Uw3NXe51rupr3JUbbE236cGw/viewform?embedded=true"
+        width="100%"
+        height="1849"
+        frameBorder="0"
+        marginHeight={0}
+        marginWidth={0}
+        className="mx-auto"
+      >
+        Loading…
+      </iframe>
+    </div>
   );
 };
