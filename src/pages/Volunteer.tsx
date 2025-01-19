@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 const Volunteer = () => {
-  const [showForm, setShowForm] = useState(false);
+  const [showGoogleForm, setShowGoogleForm] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -26,14 +26,24 @@ const Volunteer = () => {
               Join our movement and make a difference in Northern Nigeria
             </p>
             <Button 
-              onClick={() => setShowForm(!showForm)}
-              className="bg-secondary hover:bg-secondary/90"
+              onClick={() => setShowGoogleForm(!showGoogleForm)}
+              className="bg-secondary hover:bg-secondary/90 mb-8"
             >
-              {showForm ? "Hide Form" : "Fill Application Form"}
+              {showGoogleForm ? "Hide Google Form" : "Show Google Form"}
             </Button>
           </motion.div>
 
-          {showForm && <GoogleForm />}
+          {showGoogleForm && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <GoogleForm />
+            </motion.div>
+          )}
+
           <VolunteerForm />
         </div>
       </main>
