@@ -10,7 +10,6 @@ import { ChatSupport } from "@/components/ChatSupport";
 import { YouthIllustration } from "@/components/YouthIllustration";
 import { FundsRaised } from "@/components/FundsRaised";
 import { ReferralSystem } from "@/components/ReferralSystem";
-import { GoogleForm } from "@/components/GoogleForm";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -30,7 +29,6 @@ const Index = () => {
           <Gallery />
           <Founder />
           <ReferralSystem />
-          <GoogleForm />
           <div className="fixed bottom-24 right-4 z-50">
             <DonateButton />
           </div>
