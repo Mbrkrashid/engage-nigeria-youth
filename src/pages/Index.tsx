@@ -12,6 +12,8 @@ import { FundsRaised } from "@/components/FundsRaised";
 import { ReferralSystem } from "@/components/ReferralSystem";
 import { JoinMovement } from "@/components/join/JoinMovement";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
