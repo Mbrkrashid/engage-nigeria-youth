@@ -20,22 +20,33 @@ export const JoinMovement = () => {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.from("profiles").insert([
-        {
-          full_name: formData.full_name,
-          email: formData.email,
-        },
-      ]);
-
-      if (error) throw error;
-
-      toast({
-        title: "Welcome to the movement!",
-        description: "Thank you for joining us. We'll be in touch soon.",
+      // First, sign up the user
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: Math.random().toString(36).slice(-8), // Generate a random password
       });
 
-      setFormData({ full_name: "", email: "" });
-      setIsOpen(false);
+      if (authError) throw authError;
+
+      if (authData.user) {
+        // Then create their profile
+        const { error: profileError } = await supabase
+          .from("profiles")
+          .insert({
+            id: authData.user.id,
+            full_name: formData.full_name,
+          });
+
+        if (profileError) throw profileError;
+
+        toast({
+          title: "Welcome to the movement!",
+          description: "Thank you for joining us. Please check your email to verify your account.",
+        });
+
+        setFormData({ full_name: "", email: "" });
+        setIsOpen(false);
+      }
     } catch (error) {
       console.error("Error joining movement:", error);
       toast({
