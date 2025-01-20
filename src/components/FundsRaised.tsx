@@ -29,13 +29,13 @@ export const FundsRaised = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="bg-white rounded-lg shadow-lg p-6 max-w-sm mx-auto my-8"
+      className="fixed top-4 left-4 z-50 bg-white rounded-lg shadow-lg p-4 max-w-sm"
     >
       <h3 className="text-xl font-bold text-primary mb-2">Funds Raised</h3>
       <p className="text-3xl font-bold text-secondary">
         ₦{totalAmount.toLocaleString()}
       </p>
-      <p className="text-gray-600 mt-2">
+      <p className="text-gray-600 mt-2 text-sm">
         Supporting youth empowerment in Northern Nigeria
       </p>
     </motion.div>

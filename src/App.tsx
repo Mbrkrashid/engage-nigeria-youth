@@ -6,11 +6,10 @@ import { Skills } from "./components/Skills";
 import { Sponsorship } from "./components/Sponsorship";
 import { AdminDashboard } from "./components/AdminDashboard";
 
-// Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
+      staleTime: 1000 * 60 * 5,
       retry: 1,
     },
   },
@@ -20,13 +19,17 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/volunteer" element={<Volunteer />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/sponsorship" element={<Sponsorship />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-        </Routes>
+        <div className="min-h-screen bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/volunteer" element={<Volunteer />} />
+              <Route path="/skills" element={<Skills />} />
+              <Route path="/sponsorship" element={<Sponsorship />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+            </Routes>
+          </div>
+        </div>
       </Router>
     </QueryClientProvider>
   );

@@ -14,7 +14,7 @@ export const DonateButton = () => {
     setIsLoading(true);
     try {
       const handler = PaystackPop.setup({
-        key: 'pk_live_3ecc35da42e91ff23e4799f3fbf2d8c4c9941c0a', // Your Paystack public key
+        key: process.env.PAYSTACK_LIVE_KEY,
         email: 'donor@example.com',
         amount: 1000 * 100, // Amount in kobo (10,000 kobo = ₦100)
         currency: 'NGN',
@@ -22,7 +22,6 @@ export const DonateButton = () => {
         callback: async (response: any) => {
           console.log('Payment successful:', response);
           
-          // Record the donation in the database
           const { error } = await supabase.from('donations').insert([
             {
               amount: 1000,

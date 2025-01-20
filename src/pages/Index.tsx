@@ -10,30 +10,49 @@ import { ChatSupport } from "@/components/ChatSupport";
 import { YouthIllustration } from "@/components/YouthIllustration";
 import { FundsRaised } from "@/components/FundsRaised";
 import { ReferralSystem } from "@/components/ReferralSystem";
-import { JoinMovement } from "@/components/JoinMovement";
+import { JoinMovement } from "@/components/join/JoinMovement";
 import { motion } from "framer-motion";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      <main>
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
+          className="relative"
         >
+          <FundsRaised />
           <Hero />
           <YouthIllustration />
-          <FundsRaised />
+          <div className="flex flex-col items-center gap-4 mt-8">
+            <Button
+              variant="default"
+              size="lg"
+              asChild
+              className="w-full sm:w-auto"
+            >
+              <Link to="/volunteer">Become a Volunteer</Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="w-full sm:w-auto"
+            >
+              <Link to="/skills">Explore Skills</Link>
+            </Button>
+            <JoinMovement />
+            <div className="mt-4">
+              <DonateButton />
+            </div>
+          </div>
           <AboutUs />
           <Features />
           <Gallery />
           <Founder />
           <ReferralSystem />
-          <div className="fixed bottom-24 right-4 z-50">
-            <DonateButton />
-          </div>
-          <JoinMovement />
           <SocialLinks />
           <WhatsAppButton />
           <ChatSupport />
