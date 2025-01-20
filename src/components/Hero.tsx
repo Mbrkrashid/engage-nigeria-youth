@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { FundsRaised } from "@/components/FundsRaised";
+import { DonateButton } from "@/components/DonateButton";
 
 export const Hero = () => {
   return (
-    <div className="bg-gradient-to-r from-primary to-primary/90 text-white min-h-[90vh] flex items-center relative overflow-hidden">
+    <div className="bg-gradient-to-r from-primary to-primary/90 text-white min-h-screen flex items-center relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-20" />
@@ -42,6 +44,11 @@ export const Hero = () => {
       </motion.div>
 
       <div className="container mx-auto px-4 relative z-10">
+        {/* Funds Raised Component */}
+        <div className="absolute top-4 left-4">
+          <FundsRaised />
+        </div>
+
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Text Content */}
           <motion.div
@@ -85,6 +92,43 @@ export const Hero = () => {
               >
                 <Link to="/skills">Explore Skills</Link>
               </Button>
+              <DonateButton />
+            </motion.div>
+
+            {/* Youth Application Process */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mt-12 bg-white/10 rounded-lg p-6 backdrop-blur-sm"
+            >
+              <h3 className="text-xl font-semibold mb-4">How to Get Involved</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white/5 p-4 rounded-lg"
+                >
+                  <div className="text-2xl mb-2">1</div>
+                  <h4 className="font-semibold mb-2">Register</h4>
+                  <p className="text-sm opacity-80">Sign up and create your profile</p>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white/5 p-4 rounded-lg"
+                >
+                  <div className="text-2xl mb-2">2</div>
+                  <h4 className="font-semibold mb-2">Choose Programs</h4>
+                  <p className="text-sm opacity-80">Select skills and courses</p>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white/5 p-4 rounded-lg"
+                >
+                  <div className="text-2xl mb-2">3</div>
+                  <h4 className="font-semibold mb-2">Start Learning</h4>
+                  <p className="text-sm opacity-80">Begin your journey to success</p>
+                </motion.div>
+              </div>
             </motion.div>
           </motion.div>
 
