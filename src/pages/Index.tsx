@@ -10,6 +10,7 @@ import { ChatSupport } from "@/components/ChatSupport";
 import { YouthIllustration } from "@/components/YouthIllustration";
 import { FundsRaised } from "@/components/FundsRaised";
 import { ReferralSystem } from "@/components/ReferralSystem";
+import { JoinMovement } from "@/components/JoinMovement";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -32,6 +33,7 @@ const Index = () => {
           <div className="fixed bottom-24 right-4 z-50">
             <DonateButton />
           </div>
+          <JoinMovement />
           <SocialLinks />
           <WhatsAppButton />
           <ChatSupport />
