@@ -12,37 +12,6 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-20" />
       </div>
 
-      {/* Animated background elements */}
-      <motion.div
-        className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
-      >
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-20 h-20 bg-white/10 rounded-full"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, Math.random() * 60 - 30, 0],
-              scale: [1, 1.2, 1],
-              opacity: [0.5, 0.8, 0.5],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.3,
-            }}
-          />
-        ))}
-      </motion.div>
-
       <div className="container mx-auto px-4 relative z-10">
         {/* Funds Raised Component with floating animation */}
         <motion.div
