@@ -15,7 +15,7 @@ export const Hero = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Funds Raised Component with floating animation */}
         <motion.div
-          className="absolute top-4 left-4"
+          className="absolute top-4 right-4"
           animate={{
             x: [0, 20, 0],
           }}

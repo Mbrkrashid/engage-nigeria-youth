@@ -29,7 +29,7 @@ export const FundsRaised = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-4 left-4 z-50 bg-white rounded-lg shadow-lg p-4 max-w-sm"
+      className="bg-white rounded-lg shadow-lg p-4 max-w-sm"
     >
       <h3 className="text-xl font-bold text-primary mb-2">Funds Raised</h3>
       <p className="text-3xl font-bold text-secondary">

@@ -14,7 +14,7 @@ export const DonateButton = () => {
     setIsLoading(true);
     try {
       const handler = PaystackPop.setup({
-        key: process.env.PAYSTACK_LIVE_KEY,
+        key: import.meta.env.VITE_PAYSTACK_LIVE_KEY,
         email: 'donor@example.com',
         amount: 1000 * 100, // Amount in kobo (10,000 kobo = ₦100)
         currency: 'NGN',
