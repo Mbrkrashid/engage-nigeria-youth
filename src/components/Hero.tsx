@@ -17,6 +17,7 @@ export const Hero = () => {
         animate={{
           x: [0, 50, 0],
           y: [0, 30, 0],
+          scale: [1, 1.2, 1],
         }}
         transition={{
           duration: 5,
@@ -29,6 +30,7 @@ export const Hero = () => {
         animate={{
           x: [0, -40, 0],
           y: [0, -20, 0],
+          scale: [1, 1.3, 1],
         }}
         transition={{
           duration: 6,
@@ -60,9 +62,9 @@ export const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-lg md:text-xl mb-8 opacity-90"
             >
-              Join our movement to empower Northern Nigeria's youth through education, 
-              skill development, and civic engagement. Your support helps create lasting change 
-              and builds a stronger democracy for our future.
+              Join our transformative movement to empower Northern Nigeria's youth. Together, 
+              we're building future leaders, fostering civic engagement, and creating lasting 
+              positive change in our communities. Your support today shapes tomorrow's Nigeria.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -74,7 +76,7 @@ export const Hero = () => {
                 asChild
                 className="bg-secondary hover:bg-secondary/90 text-white px-8 py-6 text-lg transform hover:scale-105 transition-transform duration-200 shadow-lg"
               >
-                <Link to="/volunteer">Become a Volunteer</Link>
+                <Link to="/volunteer">Join as Volunteer</Link>
               </Button>
               <Button
                 asChild

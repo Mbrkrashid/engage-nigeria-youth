@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 declare const PaystackPop: any;
@@ -16,7 +16,7 @@ export const DonateButton = () => {
       console.log('Initializing Paystack payment...');
       const handler = PaystackPop.setup({
         key: import.meta.env.VITE_PAYSTACK_LIVE_KEY,
-        email: 'donor@example.com', // In a real app, you'd get this from a form
+        email: 'donor@example.com',
         amount: 1000 * 100, // ₦1000 in kobo
         currency: 'NGN',
         ref: `donate_${Math.floor(Math.random() * 1000000000 + 1)}`,
