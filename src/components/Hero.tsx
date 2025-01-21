@@ -11,6 +11,32 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-20" />
       </div>
 
+      {/* Floating elements */}
+      <motion.div
+        className="absolute top-10 right-10 w-20 h-20 bg-accent/20 rounded-full blur-lg"
+        animate={{
+          x: [0, 50, 0],
+          y: [0, 30, 0],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute bottom-10 left-10 w-32 h-32 bg-secondary/20 rounded-full blur-lg"
+        animate={{
+          x: [0, -40, 0],
+          y: [0, -20, 0],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Text Content */}
@@ -34,8 +60,9 @@ export const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-lg md:text-xl mb-8 opacity-90"
             >
-              Join the movement to build skills, understand your voting rights, and
-              create positive change for Northern Nigeria's future.
+              Join our movement to empower Northern Nigeria's youth through education, 
+              skill development, and civic engagement. Your support helps create lasting change 
+              and builds a stronger democracy for our future.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -58,40 +85,34 @@ export const Hero = () => {
               <DonateButton />
             </motion.div>
 
-            {/* Youth Application Process */}
+            {/* Impact Stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="mt-12 bg-white/10 rounded-lg p-6 backdrop-blur-sm"
+              className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
             >
-              <h3 className="text-xl font-semibold mb-4">How to Get Involved</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/5 p-4 rounded-lg"
-                >
-                  <div className="text-2xl mb-2">1</div>
-                  <h4 className="font-semibold mb-2">Register</h4>
-                  <p className="text-sm opacity-80">Sign up and create your profile</p>
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/5 p-4 rounded-lg"
-                >
-                  <div className="text-2xl mb-2">2</div>
-                  <h4 className="font-semibold mb-2">Choose Programs</h4>
-                  <p className="text-sm opacity-80">Select skills and courses</p>
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/5 p-4 rounded-lg"
-                >
-                  <div className="text-2xl mb-2">3</div>
-                  <h4 className="font-semibold mb-2">Start Learning</h4>
-                  <p className="text-sm opacity-80">Begin your journey to success</p>
-                </motion.div>
-              </div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/10 p-6 rounded-lg backdrop-blur-sm"
+              >
+                <h3 className="text-2xl font-bold mb-2">1000+</h3>
+                <p className="text-sm opacity-80">Youth Empowered</p>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/10 p-6 rounded-lg backdrop-blur-sm"
+              >
+                <h3 className="text-2xl font-bold mb-2">20+</h3>
+                <p className="text-sm opacity-80">Communities Reached</p>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/10 p-6 rounded-lg backdrop-blur-sm"
+              >
+                <h3 className="text-2xl font-bold mb-2">50+</h3>
+                <p className="text-sm opacity-80">Active Programs</p>
+              </motion.div>
             </motion.div>
           </motion.div>
 

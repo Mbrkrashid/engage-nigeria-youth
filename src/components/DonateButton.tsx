@@ -13,10 +13,11 @@ export const DonateButton = () => {
   const handlePayment = async () => {
     setIsLoading(true);
     try {
+      console.log('Initializing Paystack payment...');
       const handler = PaystackPop.setup({
         key: import.meta.env.VITE_PAYSTACK_LIVE_KEY,
-        email: 'donor@example.com',
-        amount: 1000 * 100, // Amount in kobo (10,000 kobo = ₦100)
+        email: 'donor@example.com', // In a real app, you'd get this from a form
+        amount: 1000 * 100, // ₦1000 in kobo
         currency: 'NGN',
         ref: `donate_${Math.floor(Math.random() * 1000000000 + 1)}`,
         callback: async (response: any) => {
@@ -41,7 +42,7 @@ export const DonateButton = () => {
           } else {
             toast({
               title: "Thank you!",
-              description: "Your donation has been received.",
+              description: "Your donation has been received. Together we can make a difference!",
             });
           }
           setIsLoading(false);
@@ -67,9 +68,9 @@ export const DonateButton = () => {
     <Button
       onClick={handlePayment}
       disabled={isLoading}
-      className="bg-secondary hover:bg-secondary/90"
+      className="bg-secondary hover:bg-secondary/90 transform hover:scale-105 transition-all duration-300"
     >
-      <Heart className="w-5 h-5 mr-2" />
+      <Heart className="w-5 h-5 mr-2 animate-pulse" />
       {isLoading ? "Processing..." : "Support the Movement"}
     </Button>
   );
