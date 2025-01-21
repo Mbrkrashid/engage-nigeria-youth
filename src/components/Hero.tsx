@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FundsRaised } from "@/components/FundsRaised";
 import { DonateButton } from "@/components/DonateButton";
 
 export const Hero = () => {
@@ -13,21 +12,6 @@ export const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Funds Raised Component with floating animation */}
-        <motion.div
-          className="absolute top-4 right-4"
-          animate={{
-            x: [0, 20, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <FundsRaised />
-        </motion.div>
-
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Text Content */}
           <motion.div
@@ -133,18 +117,6 @@ export const Hero = () => {
             </motion.div>
             
             {/* Decorative elements */}
-            <motion.div
-              className="absolute -top-4 -right-4 w-24 h-24 bg-accent/20 rounded-full blur-xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 0.8, 0.5],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
             <motion.div
               className="absolute -bottom-4 -left-4 w-32 h-32 bg-secondary/20 rounded-full blur-xl"
               animate={{

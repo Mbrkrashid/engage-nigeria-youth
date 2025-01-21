@@ -8,7 +8,6 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { DonateButton } from "@/components/DonateButton";
 import { ChatSupport } from "@/components/ChatSupport";
 import { YouthIllustration } from "@/components/YouthIllustration";
-import { FundsRaised } from "@/components/FundsRaised";
 import { ReferralSystem } from "@/components/ReferralSystem";
 import { JoinMovement } from "@/components/join/JoinMovement";
 import { motion } from "framer-motion";
@@ -25,7 +24,6 @@ const Index = () => {
           transition={{ duration: 0.5 }}
           className="relative"
         >
-          <FundsRaised />
           <Hero />
           <YouthIllustration />
           <div className="flex flex-col items-center gap-4 mt-8">
