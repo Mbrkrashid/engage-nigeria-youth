@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { Facebook, Twitter, WhatsApp } from "lucide-react";
 
 export const ReferralSystem = () => {
   const { toast } = useToast();
@@ -35,12 +36,55 @@ export const ReferralSystem = () => {
           title: "Referral link copied!",
           description: "Share this link with your friends",
         });
+        return referralLink;
       }
     } catch (error) {
       console.error("Error generating referral link:", error);
       toast({
         title: "Error",
         description: "Failed to generate referral link",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const shareToSocial = async (platform: string) => {
+    const referralLink = await generateReferralLink();
+    if (!referralLink) return;
+
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    try {
+      // Record the share
+      await supabase.from('social_shares').insert({
+        user_id: user.id,
+        referral_code: referralLink,
+        platform
+      });
+
+      // Share to platform
+      let shareUrl = '';
+      const text = "Join our youth movement for a better Nigeria! Use my referral link:";
+      
+      switch (platform) {
+        case 'whatsapp':
+          shareUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${referralLink}`)}`;
+          break;
+        case 'facebook':
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`;
+          break;
+        case 'twitter':
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${text} ${referralLink}`)}`;
+          break;
+      }
+
+      window.open(shareUrl, '_blank');
+    } catch (error) {
+      console.error("Error sharing:", error);
+      toast({
+        title: "Error",
+        description: "Failed to share referral link",
         variant: "destructive",
       });
     }
@@ -118,14 +162,29 @@ export const ReferralSystem = () => {
           transition={{ duration: 0.6 }}
           className="max-w-xl mx-auto"
         >
-          <h2 className="text-3xl font-bold text-center mb-8">Invite Friends</h2>
+          <h2 className="text-3xl font-bold text-center mb-8">Share & Invite Friends</h2>
           <div className="space-y-6">
-            <div>
+            <div className="flex justify-center space-x-4">
               <Button
-                onClick={generateReferralLink}
-                className="w-full bg-primary hover:bg-primary/90"
+                onClick={() => shareToSocial('whatsapp')}
+                className="bg-green-500 hover:bg-green-600"
               >
-                Get Your Referral Link
+                <WhatsApp className="w-5 h-5 mr-2" />
+                WhatsApp
+              </Button>
+              <Button
+                onClick={() => shareToSocial('facebook')}
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                <Facebook className="w-5 h-5 mr-2" />
+                Facebook
+              </Button>
+              <Button
+                onClick={() => shareToSocial('twitter')}
+                className="bg-blue-400 hover:bg-blue-500"
+              >
+                <Twitter className="w-5 h-5 mr-2" />
+                Twitter
               </Button>
             </div>
             <div className="relative">

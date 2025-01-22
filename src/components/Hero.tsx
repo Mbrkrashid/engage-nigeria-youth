@@ -4,7 +4,7 @@ import { HeroImage } from "./hero/HeroImage";
 
 export const Hero = () => {
   return (
-    <div className="bg-gradient-to-r from-primary to-primary/90 text-white min-h-screen flex items-center relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-r from-primary to-primary/90 text-white flex items-center relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-20" />

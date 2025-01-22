@@ -278,6 +278,30 @@ export type Database = {
         }
         Relationships: []
       }
+      social_shares: {
+        Row: {
+          created_at: string
+          id: string
+          platform: string
+          referral_code: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          platform: string
+          referral_code: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          platform?: string
+          referral_code?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       sponsorships: {
         Row: {
           amount: number
