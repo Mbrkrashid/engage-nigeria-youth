@@ -1,9 +1,14 @@
 import { supabase } from "@/integrations/supabase/client";
-import { type ToastProps } from "@/components/ui/toast";
+import { ToastActionElement } from "@/components/ui/toast";
 
-export const generateReferralLink = async (toast: {
-  (props: Omit<ToastProps, "id">): void;
-}) => {
+type ToastProps = {
+  title?: string;
+  description?: string;
+  variant?: "default" | "destructive";
+  action?: ToastActionElement;
+};
+
+export const generateReferralLink = async (toast: (props: ToastProps) => void) => {
   try {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
