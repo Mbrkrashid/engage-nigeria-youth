@@ -1,7 +1,9 @@
 import { supabase } from "@/integrations/supabase/client";
-import { Toast } from "@/components/ui/use-toast";
+import { type ToastProps } from "@/components/ui/toast";
 
-export const generateReferralLink = async (toast: Toast) => {
+export const generateReferralLink = async (toast: {
+  (props: Omit<ToastProps, "id">): void;
+}) => {
   try {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
