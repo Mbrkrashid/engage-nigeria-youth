@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Facebook, Twitter, MessageCircle } from "lucide-react";
+import { Facebook, Twitter, MessageSquare } from "lucide-react";
 
 export const ReferralSystem = () => {
   const { toast } = useToast();
@@ -169,7 +169,7 @@ export const ReferralSystem = () => {
                 onClick={() => shareToSocial('whatsapp')}
                 className="bg-green-500 hover:bg-green-600"
               >
-                <MessageCircle className="w-5 h-5 mr-2" />
+                <MessageSquare className="w-5 h-5 mr-2" />
                 WhatsApp
               </Button>
               <Button
