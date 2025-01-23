@@ -14,12 +14,17 @@ export const DonateButton = () => {
     setIsLoading(true);
     try {
       console.log('Initializing Paystack payment...');
+      const { data: { user } } = await supabase.auth.getUser();
+      
       const handler = PaystackPop.setup({
         key: import.meta.env.VITE_PAYSTACK_LIVE_KEY,
-        email: 'donor@example.com',
+        email: user?.email || 'donor@example.com',
         amount: 1000 * 100, // ₦1000 in kobo
         currency: 'NGN',
         ref: `donate_${Math.floor(Math.random() * 1000000000 + 1)}`,
+        metadata: {
+          user_id: user?.id
+        },
         callback: async (response: any) => {
           console.log('Payment successful:', response);
           
@@ -28,7 +33,8 @@ export const DonateButton = () => {
               amount: 1000,
               payment_status: 'completed',
               payment_method: 'paystack',
-              donor_email: 'donor@example.com'
+              donor_email: user?.email || 'donor@example.com',
+              donor_name: user?.user_metadata?.full_name
             }
           ]);
 

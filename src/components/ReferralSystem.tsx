@@ -20,16 +20,20 @@ export const ReferralSystem = () => {
 
       const { data: profile } = await supabase
         .from("profiles")
-        .select("referral_code")
+        .select("referral_code, full_name")
         .eq("id", user.id)
         .single();
 
       if (profile?.referral_code) {
         const referralLink = `${window.location.origin}?ref=${profile.referral_code}`;
+        const shareText = `Join our youth movement for a better Nigeria! I'm ${profile.full_name || 'a member'} and I invite you to be part of this change. Use my referral link: ${referralLink}`;
         
         if (platform === 'whatsapp') {
-          const text = encodeURIComponent(`Join our youth movement for a better Nigeria! Use my referral link: ${referralLink}`);
-          window.open(`https://wa.me/?text=${text}`, '_blank');
+          window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
+        } else if (platform === 'facebook') {
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}&quote=${encodeURIComponent(shareText)}`, '_blank');
+        } else if (platform === 'twitter') {
+          window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`, '_blank');
         }
 
         // Record the share
@@ -55,7 +59,7 @@ export const ReferralSystem = () => {
   };
 
   return (
-    <section className="py-16 bg-background">
+    <section className="py-8 sm:py-16 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -63,8 +67,8 @@ export const ReferralSystem = () => {
           transition={{ duration: 0.6 }}
           className="max-w-xl mx-auto"
         >
-          <h2 className="text-3xl font-bold text-center mb-8">Share & Invite Friends</h2>
-          <div className="space-y-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8">Share & Invite Friends</h2>
+          <div className="space-y-4 sm:space-y-6">
             <SocialShareButtons onShare={handleShare} />
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
