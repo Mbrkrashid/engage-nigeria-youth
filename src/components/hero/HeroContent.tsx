@@ -4,32 +4,64 @@ import { Link } from "react-router-dom";
 import { DonateButton } from "@/components/DonateButton";
 import { ImpactStats } from "./ImpactStats";
 
-export const HeroContent = () => {
+interface AdminContent {
+  events: any[];
+  voterEducation: any[];
+  media: any[];
+}
+
+interface HeroContentProps {
+  adminContent: AdminContent;
+}
+
+export const HeroContent = ({ adminContent }: HeroContentProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8 }}
-      className="text-left"
+      className="text-left space-y-6"
     >
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+        className="text-4xl md:text-6xl font-bold leading-tight"
       >
         Empowering Youth for a Better Nigeria
       </motion.h1>
-      <motion.p
+
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-lg md:text-xl mb-8 opacity-90"
+        className="space-y-4"
       >
-        Join our transformative movement to empower Northern Nigeria's youth. Together, 
-        we're building future leaders, fostering civic engagement, and creating lasting 
-        positive change in our communities. Your support today shapes tomorrow's Nigeria.
-      </motion.p>
+        {adminContent.events.length > 0 && (
+          <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+            <h3 className="text-xl font-semibold mb-2">Upcoming Events</h3>
+            {adminContent.events.map((event) => (
+              <div key={event.id} className="mb-2">
+                <h4 className="font-medium">{event.title}</h4>
+                <p className="text-sm opacity-80">{event.description}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {adminContent.voterEducation.length > 0 && (
+          <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+            <h3 className="text-xl font-semibold mb-2">Voter Education</h3>
+            {adminContent.voterEducation.map((item) => (
+              <div key={item.id} className="mb-2">
+                <h4 className="font-medium">{item.title}</h4>
+                <p className="text-sm opacity-80">{item.content}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -42,14 +74,9 @@ export const HeroContent = () => {
         >
           <Link to="/volunteer">Join as Volunteer</Link>
         </Button>
-        <Button
-          asChild
-          className="bg-accent hover:bg-accent/90 text-primary px-8 py-6 text-lg transform hover:scale-105 transition-transform duration-200 shadow-lg"
-        >
-          <Link to="/skills">Explore Skills</Link>
-        </Button>
         <DonateButton />
       </motion.div>
+
       <ImpactStats />
     </motion.div>
   );

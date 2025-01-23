@@ -35,9 +35,9 @@ export const DonateButton = () => {
           if (error) {
             console.error('Error recording donation:', error);
             toast({
-              variant: "destructive",
               title: "Error",
               description: "Failed to record donation. Please contact support.",
+              variant: "destructive",
             });
           } else {
             toast({
@@ -56,9 +56,9 @@ export const DonateButton = () => {
     } catch (error) {
       console.error('Error:', error);
       toast({
-        variant: "destructive",
         title: "Error",
         description: "Failed to process donation. Please try again.",
+        variant: "destructive",
       });
       setIsLoading(false);
     }
@@ -68,7 +68,7 @@ export const DonateButton = () => {
     <Button
       onClick={handlePayment}
       disabled={isLoading}
-      className="bg-secondary hover:bg-secondary/90 transform hover:scale-105 transition-all duration-300"
+      className="bg-secondary hover:bg-secondary/90 transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
     >
       <Heart className="w-5 h-5 mr-2 animate-pulse" />
       {isLoading ? "Processing..." : "Support the Movement"}
