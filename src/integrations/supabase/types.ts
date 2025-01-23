@@ -95,6 +95,7 @@ export type Database = {
           id: string
           image_url: string | null
           location: string | null
+          status: string | null
           title: string
           updated_at: string
         }
@@ -105,6 +106,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           location?: string | null
+          status?: string | null
           title: string
           updated_at?: string
         }
@@ -115,6 +117,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           location?: string | null
+          status?: string | null
           title?: string
           updated_at?: string
         }
@@ -150,6 +153,7 @@ export type Database = {
           description: string | null
           id: string
           media_type: string
+          status: string | null
           title: string
           updated_at: string
           url: string
@@ -159,6 +163,7 @@ export type Database = {
           description?: string | null
           id?: string
           media_type: string
+          status?: string | null
           title: string
           updated_at?: string
           url: string
@@ -168,6 +173,7 @@ export type Database = {
           description?: string | null
           id?: string
           media_type?: string
+          status?: string | null
           title?: string
           updated_at?: string
           url?: string
