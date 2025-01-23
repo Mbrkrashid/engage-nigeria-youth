@@ -6,6 +6,7 @@ interface FloatingElementProps {
     x: number[];
     y: number[];
     scale: number[];
+    rotate?: number[];  // Made rotate optional with ?
   };
   duration: number;
 }
