@@ -7,23 +7,30 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const skillCategories = [
   {
-    title: "Advocacy and Activism",
+    title: "IT & Technical Studies",
     skills: [
-      "Public speaking and presentation",
-      "Campaign strategy and planning",
-      "Social media activism and online mobilization",
-      "Community organizing and mobilization",
-      "Lobbying and advocacy techniques",
+      "Microsoft Technologies",
+      "Professional Programming",
+      "Web Technologies",
+      "SAP Technologies",
     ],
   },
   {
-    title: "Leadership and Governance",
+    title: "Digital & Programming",
     skills: [
-      "Leadership principles and practices",
-      "Team management and collaboration",
-      "Decision-making and problem-solving",
-      "Conflict resolution and negotiation",
-      "Governance and policy analysis",
+      "Google Technologies",
+      "Digital Marketing",
+      "Python Technologies",
+      "JAVA Technologies",
+    ],
+  },
+  {
+    title: "Creative & Technical",
+    skills: [
+      "Adobe Technologies",
+      "Database Management",
+      "Software Quality",
+      "Telecommunications",
     ],
   },
 ];
@@ -36,12 +43,12 @@ export const Skills = () => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-primary">
-          Available Skills Programs
+          Diploma Certification Courses
         </h2>
         
         <Tabs defaultValue="programs" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="programs">Programs</TabsTrigger>
+            <TabsTrigger value="programs">Available Courses</TabsTrigger>
             <TabsTrigger value="register">Register</TabsTrigger>
           </TabsList>
           
@@ -58,16 +65,17 @@ export const Skills = () => {
                   <h3 className="text-xl font-semibold mb-4 text-primary">{category.title}</h3>
                   <ul className="space-y-2 mb-6">
                     {category.skills.map((skill) => (
-                      <li key={skill} className="text-gray-600">
-                        • {skill}
+                      <li key={skill} className="text-gray-600 flex items-center">
+                        <span className="w-2 h-2 bg-secondary rounded-full mr-2"></span>
+                        {skill}
                       </li>
                     ))}
                   </ul>
                   <Button
                     onClick={() => navigate(`/register/${encodeURIComponent(category.title)}`)}
-                    className="w-full"
+                    className="w-full bg-primary hover:bg-primary/90"
                   >
-                    Register for Program
+                    Enroll Now
                   </Button>
                 </motion.div>
               ))}
