@@ -16,8 +16,13 @@ export const DonateButton = () => {
       console.log('Initializing Paystack payment...');
       const { data: { user } } = await supabase.auth.getUser();
       
+      const { data: { secret } } = await supabase.functions.invoke('get-paystack-key');
+      if (!secret) {
+        throw new Error('Failed to get Paystack key');
+      }
+
       const handler = PaystackPop.setup({
-        key: import.meta.env.VITE_PAYSTACK_LIVE_KEY,
+        key: secret,
         email: user?.email || 'donor@example.com',
         amount: 1000 * 100, // ₦1000 in kobo
         currency: 'NGN',
