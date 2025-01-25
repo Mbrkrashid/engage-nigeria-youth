@@ -13,10 +13,11 @@ import { JoinMovement } from "@/components/join/JoinMovement";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { FloatingElements } from "@/components/FloatingElements";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-primary">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
@@ -24,6 +25,7 @@ const Index = () => {
           transition={{ duration: 0.5 }}
           className="relative"
         >
+          <FloatingElements />
           <Hero />
           <YouthIllustration />
           <div className="flex flex-col items-center gap-4 mt-8">
@@ -43,10 +45,10 @@ const Index = () => {
             >
               <Link to="/skills">Explore Skills</Link>
             </Button>
-            <JoinMovement />
-            <div className="mt-4">
+            <Link to="/sponsorship" className="w-full sm:w-auto">
               <DonateButton />
-            </div>
+            </Link>
+            <JoinMovement />
           </div>
           <AboutUs />
           <Features />
@@ -58,6 +60,8 @@ const Index = () => {
           <ChatSupport />
         </motion.div>
       </main>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR-CLIENT-ID"
+     crossOrigin="anonymous"></script>
     </div>
   );
 };

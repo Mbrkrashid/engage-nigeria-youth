@@ -4,8 +4,6 @@ import { Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-declare const PaystackPop: any;
-
 export const DonateButton = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -16,12 +14,17 @@ export const DonateButton = () => {
       console.log('Initializing Paystack payment...');
       const { data: { user } } = await supabase.auth.getUser();
       
-      const { data: { secret } } = await supabase.functions.invoke('get-paystack-key');
-      if (!secret) {
+      // Get the Paystack key from Supabase Edge Function
+      const { data: { secret }, error: keyError } = await supabase.functions.invoke('get-paystack-key');
+      
+      if (keyError || !secret) {
+        console.error('Error getting Paystack key:', keyError);
         throw new Error('Failed to get Paystack key');
       }
 
-      const handler = PaystackPop.setup({
+      // Initialize Paystack
+      const handler = new window.PaystackPop();
+      handler.newTransaction({
         key: secret,
         email: user?.email || 'donor@example.com',
         amount: 1000 * 100, // ₦1000 in kobo
@@ -74,7 +77,6 @@ export const DonateButton = () => {
           });
         },
       });
-      handler.openIframe();
     } catch (error) {
       console.error('Error:', error);
       toast({
