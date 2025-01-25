@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -13,7 +12,7 @@ export const Sponsorship = () => {
     amount: "",
     sponsor_name: "",
     sponsor_email: "",
-    message: "",
+    phone_number: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,7 +37,7 @@ export const Sponsorship = () => {
         amount: "",
         sponsor_name: "",
         sponsor_email: "",
-        message: "",
+        phone_number: "",
       });
     } catch (error) {
       console.error("Error submitting sponsorship:", error);
@@ -53,7 +52,7 @@ export const Sponsorship = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -62,89 +61,84 @@ export const Sponsorship = () => {
   };
 
   return (
-    <section className="py-20 bg-primary/5">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-2xl mx-auto"
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="w-full max-w-md mx-auto bg-white rounded-lg shadow-xl p-6"
+    >
+      <h2 className="text-2xl font-bold text-center mb-6 text-primary">
+        Become a Sponsor
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="sponsor_name" className="block text-sm font-medium mb-2">
+            Full Name *
+          </label>
+          <Input
+            id="sponsor_name"
+            name="sponsor_name"
+            value={formData.sponsor_name}
+            onChange={handleChange}
+            required
+            className="w-full"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="phone_number" className="block text-sm font-medium mb-2">
+            Phone Number *
+          </label>
+          <Input
+            id="phone_number"
+            name="phone_number"
+            type="tel"
+            value={formData.phone_number}
+            onChange={handleChange}
+            required
+            className="w-full"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="sponsor_email" className="block text-sm font-medium mb-2">
+            Email Address *
+          </label>
+          <Input
+            id="sponsor_email"
+            name="sponsor_email"
+            type="email"
+            value={formData.sponsor_email}
+            onChange={handleChange}
+            required
+            className="w-full"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="amount" className="block text-sm font-medium mb-2">
+            Sponsorship Amount (₦) *
+          </label>
+          <Input
+            id="amount"
+            name="amount"
+            type="number"
+            value={formData.amount}
+            onChange={handleChange}
+            required
+            min="1000"
+            className="w-full"
+          />
+        </div>
+
+        <Button
+          type="submit"
+          className="w-full bg-primary hover:bg-primary/90"
+          disabled={isLoading}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">
-            Support Our Mission
-          </h2>
-          <div className="bg-white rounded-lg shadow-xl p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="amount" className="block text-sm font-medium mb-2">
-                  Sponsorship Amount (₦) *
-                </label>
-                <Input
-                  id="amount"
-                  name="amount"
-                  type="number"
-                  value={formData.amount}
-                  onChange={handleChange}
-                  required
-                  min="1000"
-                  className="w-full"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="sponsor_name" className="block text-sm font-medium mb-2">
-                  Name *
-                </label>
-                <Input
-                  id="sponsor_name"
-                  name="sponsor_name"
-                  value={formData.sponsor_name}
-                  onChange={handleChange}
-                  required
-                  className="w-full"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="sponsor_email" className="block text-sm font-medium mb-2">
-                  Email *
-                </label>
-                <Input
-                  id="sponsor_email"
-                  name="sponsor_email"
-                  type="email"
-                  value={formData.sponsor_email}
-                  onChange={handleChange}
-                  required
-                  className="w-full"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full"
-                  placeholder="Share why you're supporting our cause..."
-                />
-              </div>
-
-              <Button
-                type="submit"
-                className="w-full bg-primary hover:bg-primary/90"
-                disabled={isLoading}
-              >
-                {isLoading ? "Processing..." : "Submit Sponsorship"}
-              </Button>
-            </form>
-          </div>
-        </motion.div>
-      </div>
-    </section>
+          {isLoading ? "Processing..." : "Submit Sponsorship"}
+        </Button>
+      </form>
+    </motion.div>
   );
 };

@@ -320,6 +320,7 @@ export type Database = {
           created_at: string
           id: string
           message: string | null
+          phone_number: string | null
           sponsor_email: string | null
           sponsor_name: string | null
           status: string | null
@@ -329,6 +330,7 @@ export type Database = {
           created_at?: string
           id?: string
           message?: string | null
+          phone_number?: string | null
           sponsor_email?: string | null
           sponsor_name?: string | null
           status?: string | null
@@ -338,6 +340,7 @@ export type Database = {
           created_at?: string
           id?: string
           message?: string | null
+          phone_number?: string | null
           sponsor_email?: string | null
           sponsor_name?: string | null
           status?: string | null

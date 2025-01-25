@@ -14,6 +14,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { FloatingElements } from "@/components/FloatingElements";
+import { Sponsorship } from "@/components/Sponsorship";
 
 const Index = () => {
   return (
@@ -45,9 +46,7 @@ const Index = () => {
             >
               <Link to="/skills">Explore Skills</Link>
             </Button>
-            <Link to="/sponsorship" className="w-full sm:w-auto">
-              <DonateButton />
-            </Link>
+            <Sponsorship />
             <JoinMovement />
           </div>
           <AboutUs />
