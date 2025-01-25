@@ -28,7 +28,14 @@ export const DonateButton = () => {
         currency: 'NGN',
         ref: `donate_${Math.floor(Math.random() * 1000000000 + 1)}`,
         metadata: {
-          user_id: user?.id
+          user_id: user?.id,
+          custom_fields: [
+            {
+              display_name: "Donation Type",
+              variable_name: "donation_type",
+              value: "one_time"
+            }
+          ]
         },
         callback: async (response: any) => {
           console.log('Payment successful:', response);
@@ -61,6 +68,10 @@ export const DonateButton = () => {
         onClose: () => {
           console.log('Payment window closed');
           setIsLoading(false);
+          toast({
+            title: "Payment Cancelled",
+            description: "You have closed the payment window.",
+          });
         },
       });
       handler.openIframe();
