@@ -11,13 +11,15 @@ serve(async (req) => {
   }
 
   try {
-    const paystackKey = Deno.env.get('PAYSTACK_LIVE_KEY')
-    if (!paystackKey) {
-      throw new Error('Missing Paystack key')
+    // Get the public key from environment variables
+    const publicKey = Deno.env.get('Live Public Key')
+    
+    if (!publicKey) {
+      throw new Error('Paystack public key not configured')
     }
 
     return new Response(
-      JSON.stringify({ secret: paystackKey }),
+      JSON.stringify({ publicKey }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200,
@@ -28,7 +30,7 @@ serve(async (req) => {
       JSON.stringify({ error: error.message }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 500,
+        status: 400,
       },
     )
   }

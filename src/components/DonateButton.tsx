@@ -14,16 +14,17 @@ export const DonateButton = () => {
       console.log('Initializing Paystack payment...');
       const { data: { user } } = await supabase.auth.getUser();
       
-      const { data: { secret }, error: keyError } = await supabase.functions.invoke('get-paystack-key');
+      // Get Paystack key from Supabase Edge Function
+      const { data: { publicKey }, error: keyError } = await supabase.functions.invoke('get-paystack-key');
       
-      if (keyError || !secret) {
+      if (keyError || !publicKey) {
         console.error('Error getting Paystack key:', keyError);
         throw new Error('Failed to get Paystack key');
       }
 
-      const handler = new window.PaystackPop();
-      handler.newTransaction({
-        key: secret,
+      // Initialize Paystack
+      const handler = PaystackPop.setup({
+        key: publicKey,
         email: user?.email || 'donor@example.com',
         amount: 1000 * 100, // ₦1000 in kobo
         currency: 'NGN',
@@ -39,7 +40,8 @@ export const DonateButton = () => {
         callback: async (response) => {
           console.log('Payment successful:', response);
           
-          const { error } = await supabase.from('donations').insert([{
+          // Record the donation in the database
+          const { error: dbError } = await supabase.from('donations').insert([{
             amount: 1000,
             payment_status: 'completed',
             payment_method: 'paystack',
@@ -47,8 +49,8 @@ export const DonateButton = () => {
             donor_name: user?.user_metadata?.full_name
           }]);
 
-          if (error) {
-            console.error('Error recording donation:', error);
+          if (dbError) {
+            console.error('Error recording donation:', dbError);
             toast({
               title: "Error",
               description: "Failed to record donation. Please contact support.",
@@ -71,6 +73,8 @@ export const DonateButton = () => {
           });
         },
       });
+
+      handler.openIframe();
     } catch (error) {
       console.error('Error:', error);
       toast({
