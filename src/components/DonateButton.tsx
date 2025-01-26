@@ -22,8 +22,9 @@ export const DonateButton = () => {
         throw new Error('Failed to get Paystack key');
       }
 
-      // Initialize Paystack
-      const handler = PaystackPop.setup({
+      // Initialize Paystack using window.PaystackPop
+      const handler = new window.PaystackPop();
+      handler.newTransaction({
         key: publicKey,
         email: user?.email || 'donor@example.com',
         amount: 1000 * 100, // ₦1000 in kobo
@@ -73,8 +74,6 @@ export const DonateButton = () => {
           });
         },
       });
-
-      handler.openIframe();
     } catch (error) {
       console.error('Error:', error);
       toast({
