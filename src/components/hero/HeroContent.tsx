@@ -73,12 +73,12 @@ export const HeroContent = ({ adminContent }: HeroContentProps) => {
           asChild
           className="bg-secondary hover:bg-secondary/90 text-white px-8 py-6 text-lg transform hover:scale-105 transition-transform duration-200 shadow-lg"
         >
-          <Link to="/volunteer">Join as Volunteer</Link>
+          <Link to="https://forms.gle/Ld9YvqRwvjvxBxLt6">Join as Volunteer</Link>
         </Button>
         <DonateButton />
+        <JoinMovement />
       </motion.div>
 
-      <JoinMovement />
       <ImpactStats />
     </motion.div>
   );

@@ -9,7 +9,6 @@ import { DonateButton } from "@/components/DonateButton";
 import { ChatSupport } from "@/components/ChatSupport";
 import { YouthIllustration } from "@/components/YouthIllustration";
 import { ReferralSystem } from "@/components/ReferralSystem";
-import { JoinMovement } from "@/components/join/JoinMovement";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -36,7 +35,7 @@ const Index = () => {
               asChild
               className="w-full sm:w-auto"
             >
-              <Link to="/volunteer">Become a Volunteer</Link>
+              <Link to="https://forms.gle/Ld9YvqRwvjvxBxLt6">Become a Volunteer</Link>
             </Button>
             <Button
               variant="outline"
@@ -47,7 +46,6 @@ const Index = () => {
               <Link to="/skills">Explore Skills</Link>
             </Button>
             <Sponsorship />
-            <JoinMovement />
           </div>
           <AboutUs />
           <Features />
