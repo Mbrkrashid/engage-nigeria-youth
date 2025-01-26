@@ -37,7 +37,7 @@ export const JoinMovement = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 sm:bottom-8 sm:right-8">
+    <div className="fixed bottom-4 left-4 z-50 sm:bottom-8 sm:left-8">
       <AnimatePresence>
         {!isOpen ? (
           <motion.div

@@ -32,7 +32,7 @@ export const GoogleSignInButton = ({ onGoogleSignUp, isLoading }: GoogleSignInBu
           fill="#EA4335"
         />
       </svg>
-      Join with Google
+      {isLoading ? "Signing in..." : "Join with Google"}
     </Button>
   );
 };

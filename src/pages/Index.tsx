@@ -45,7 +45,6 @@ const Index = () => {
             >
               <Link to="/skills">Explore Skills</Link>
             </Button>
-            <JoinMovement />
           </div>
           <AboutUs />
           <Features />
@@ -55,6 +54,7 @@ const Index = () => {
           <SocialLinks />
           <WhatsAppButton />
           <ChatSupport />
+          <JoinMovement />
         </motion.div>
       </main>
     </div>

@@ -17,7 +17,7 @@ export const JoinDialog = ({ showForm, onClose, onGoogleSignUp, isLoading }: Joi
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="bg-white rounded-lg shadow-xl p-6 w-[90vw] max-w-md"
+      className="bg-white rounded-lg shadow-xl p-6 w-[90vw] max-w-md sm:w-96"
     >
       {!showForm ? (
         <>
