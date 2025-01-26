@@ -14,7 +14,6 @@ export const DonateButton = () => {
       console.log('Initializing Paystack payment...');
       const { data: { user } } = await supabase.auth.getUser();
       
-      // Get the Paystack key from Supabase Edge Function
       const { data: { secret }, error: keyError } = await supabase.functions.invoke('get-paystack-key');
       
       if (keyError || !secret) {
@@ -22,7 +21,6 @@ export const DonateButton = () => {
         throw new Error('Failed to get Paystack key');
       }
 
-      // Initialize Paystack
       const handler = new window.PaystackPop();
       handler.newTransaction({
         key: secret,
@@ -32,26 +30,22 @@ export const DonateButton = () => {
         ref: `donate_${Math.floor(Math.random() * 1000000000 + 1)}`,
         metadata: {
           user_id: user?.id,
-          custom_fields: [
-            {
-              display_name: "Donation Type",
-              variable_name: "donation_type",
-              value: "one_time"
-            }
-          ]
+          custom_fields: [{
+            display_name: "Donation Type",
+            variable_name: "donation_type",
+            value: "one_time"
+          }]
         },
-        callback: async (response: any) => {
+        callback: async (response) => {
           console.log('Payment successful:', response);
           
-          const { error } = await supabase.from('donations').insert([
-            {
-              amount: 1000,
-              payment_status: 'completed',
-              payment_method: 'paystack',
-              donor_email: user?.email || 'donor@example.com',
-              donor_name: user?.user_metadata?.full_name
-            }
-          ]);
+          const { error } = await supabase.from('donations').insert([{
+            amount: 1000,
+            payment_status: 'completed',
+            payment_method: 'paystack',
+            donor_email: user?.email || 'donor@example.com',
+            donor_name: user?.user_metadata?.full_name
+          }]);
 
           if (error) {
             console.error('Error recording donation:', error);
