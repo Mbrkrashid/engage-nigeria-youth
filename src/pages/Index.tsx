@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { FloatingElements } from "@/components/FloatingElements";
-import { Sponsorship } from "@/components/Sponsorship";
+import { JoinMovement } from "@/components/join/JoinMovement";
 
 const Index = () => {
   return (
@@ -35,7 +35,7 @@ const Index = () => {
               asChild
               className="w-full sm:w-auto"
             >
-              <Link to="https://forms.gle/Ld9YvqRwvjvxBxLt6">Become a Volunteer</Link>
+              <Link to="/volunteer">Join as Volunteer</Link>
             </Button>
             <Button
               variant="outline"
@@ -45,7 +45,7 @@ const Index = () => {
             >
               <Link to="/skills">Explore Skills</Link>
             </Button>
-            <Sponsorship />
+            <JoinMovement />
           </div>
           <AboutUs />
           <Features />
@@ -57,8 +57,6 @@ const Index = () => {
           <ChatSupport />
         </motion.div>
       </main>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR-CLIENT-ID"
-     crossOrigin="anonymous"></script>
     </div>
   );
 };
