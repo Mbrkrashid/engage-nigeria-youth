@@ -22,7 +22,6 @@ export const DonateButton = () => {
         throw new Error('Failed to get Paystack key');
       }
 
-      // Initialize Paystack using window.PaystackPop
       const handler = new window.PaystackPop();
       handler.newTransaction({
         key: publicKey,
