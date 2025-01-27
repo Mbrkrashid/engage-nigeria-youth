@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
+import { Grid } from "lucide-react";
 
 export const Gallery = () => {
   const [media, setMedia] = useState<any[]>([]);
@@ -32,8 +33,9 @@ export const Gallery = () => {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-primary"
+          className="text-3xl md:text-4xl font-bold text-center mb-12 text-primary flex items-center justify-center gap-2"
         >
+          <Grid className="w-8 h-8" />
           Our Gallery
         </motion.h2>
         
@@ -42,7 +44,12 @@ export const Gallery = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
+            <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pointer-events-none">
+              {[...Array(9)].map((_, i) => (
+                <div key={i} className="border-2 border-dashed border-primary/20 rounded-lg"></div>
+              ))}
+            </div>
             {media.map((item, index) => (
               <motion.div
                 key={item.id}
@@ -50,7 +57,7 @@ export const Gallery = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-white rounded-lg overflow-hidden shadow-lg transform transition-all duration-300"
+                className="bg-white rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 relative z-10"
               >
                 {item.media_type === "image" ? (
                   <img

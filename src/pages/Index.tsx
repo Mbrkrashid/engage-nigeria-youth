@@ -27,25 +27,17 @@ const Index = () => {
         >
           <FloatingElements />
           <Hero />
-          <YouthIllustration />
-          <div className="flex flex-col items-center gap-4 mt-8">
-            <Button
-              variant="default"
-              size="lg"
-              asChild
-              className="w-full sm:w-auto"
-            >
-              <Link to="/volunteer">Join as Volunteer</Link>
-            </Button>
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
             <Button
               variant="outline"
               size="lg"
               asChild
-              className="w-full sm:w-auto"
+              className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white"
             >
               <Link to="/skills">Explore Skills</Link>
             </Button>
           </div>
+          <YouthIllustration />
           <AboutUs />
           <Features />
           <Gallery />
