@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import { JoinMovement } from "./join/JoinMovement";
 
 export const Hero = () => {
   const [events, setEvents] = useState<any[]>([]);
@@ -18,21 +19,18 @@ export const Hero = () => {
 
   const fetchAdminContent = async () => {
     try {
-      // Fetch events
       const { data: eventsData } = await supabase
         .from("events")
         .select("*")
         .order("created_at", { ascending: false })
         .limit(3);
       
-      // Fetch voter education
       const { data: educationData } = await supabase
         .from("voter_education")
         .select("*")
         .order("created_at", { ascending: false })
         .limit(3);
       
-      // Fetch media
       const { data: mediaData } = await supabase
         .from("media")
         .select("*")
@@ -49,12 +47,10 @@ export const Hero = () => {
 
   return (
     <div className="min-h-[100vh] bg-gradient-to-r from-primary to-primary/90 text-white flex items-center relative overflow-hidden">
-      {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-20" />
       </div>
 
-      {/* Floating elements with enhanced animations */}
       <FloatingElement
         className="absolute top-10 right-10 w-20 h-20 bg-accent/20 rounded-full blur-lg"
         animate={{
@@ -93,12 +89,15 @@ export const Hero = () => {
           <Button
             asChild
             className="bg-secondary hover:bg-secondary/90 text-white"
-            onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLScExQF9XAuS3m1-RmIXYo6ocbV7sE3OKGJvuS_9VRToNdEiYw/viewform', '_blank')}
           >
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScExQF9XAuS3m1-RmIXYo6ocbV7sE3OKGJvuS_9VRToNdEiYw/viewform" target="_blank" rel="noopener noreferrer">
               Register for Skills
             </a>
           </Button>
+        </div>
+
+        <div className="mt-8">
+          <JoinMovement />
         </div>
       </div>
     </div>

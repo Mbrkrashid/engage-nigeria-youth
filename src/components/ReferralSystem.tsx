@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { SocialShareButtons } from "./referral/SocialShareButtons";
-import { ReferralCodeInput } from "./referral/ReferralCodeInput";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -28,19 +27,12 @@ export const ReferralSystem = () => {
         const referralLink = `${window.location.origin}?ref=${profile.referral_code}`;
         const shareText = `Join our youth movement for a better Nigeria! I'm ${profile.full_name || 'a member'} and I invite you to be part of this change. Use my referral link: ${referralLink}`;
         
-        if (platform === 'whatsapp') {
-          window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
-        } else if (platform === 'facebook') {
-          window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}&quote=${encodeURIComponent(shareText)}`, '_blank');
-        } else if (platform === 'twitter') {
-          window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`, '_blank');
-        }
-
-        // Record the share
+        window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
+        
         await supabase.from('social_shares').insert({
           user_id: user.id,
           referral_code: profile.referral_code,
-          platform
+          platform: 'whatsapp'
         });
 
         toast({
@@ -68,20 +60,7 @@ export const ReferralSystem = () => {
           className="max-w-xl mx-auto"
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8">Share & Invite Friends</h2>
-          <div className="space-y-4 sm:space-y-6">
-            <SocialShareButtons onShare={handleShare} />
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
-                  Or use a referral code
-                </span>
-              </div>
-            </div>
-            <ReferralCodeInput />
-          </div>
+          <SocialShareButtons onShare={handleShare} />
         </motion.div>
       </div>
     </section>
