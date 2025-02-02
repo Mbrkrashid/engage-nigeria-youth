@@ -46,7 +46,7 @@ export const Hero = () => {
   };
 
   return (
-    <div className="min-h-[100vh] bg-gradient-to-r from-primary to-primary/90 text-white flex items-center relative overflow-hidden">
+    <div className="min-h-[100vh] bg-gradient-to-r from-primary to-primary/90 text-white flex flex-col items-center relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-20" />
       </div>
@@ -78,26 +78,26 @@ export const Hero = () => {
           <HeroImage />
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <div className="flex flex-col items-center gap-4 mt-8">
           <Button
             asChild
-            className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white"
+            className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white w-full sm:w-auto"
           >
             <Link to="/skills">Explore Skills</Link>
           </Button>
           
           <Button
             asChild
-            className="bg-secondary hover:bg-secondary/90 text-white"
+            className="bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto"
           >
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScExQF9XAuS3m1-RmIXYo6ocbV7sE3OKGJvuS_9VRToNdEiYw/viewform" target="_blank" rel="noopener noreferrer">
               Register for Skills
             </a>
           </Button>
-        </div>
 
-        <div className="mt-8">
-          <JoinMovement />
+          <div className="w-full sm:w-auto mt-4">
+            <JoinMovement />
+          </div>
         </div>
       </div>
     </div>
