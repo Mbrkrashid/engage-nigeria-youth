@@ -94,10 +94,8 @@ export const Hero = () => {
               Register for Skills
             </a>
           </Button>
-
-          <div className="w-full sm:w-auto mt-4">
-            <JoinMovement />
-          </div>
+          
+          <JoinMovement />
         </div>
       </div>
     </div>
