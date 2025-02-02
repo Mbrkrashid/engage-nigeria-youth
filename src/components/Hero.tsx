@@ -4,6 +4,8 @@ import { HeroContent } from "./hero/HeroContent";
 import { HeroImage } from "./hero/HeroImage";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
+import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   const [events, setEvents] = useState<any[]>([]);
@@ -78,6 +80,25 @@ export const Hero = () => {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <HeroContent adminContent={{ events, voterEducation, media }} />
           <HeroImage />
+        </div>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+          <Button
+            asChild
+            className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white"
+          >
+            <Link to="/skills">Explore Skills</Link>
+          </Button>
+          
+          <Button
+            asChild
+            className="bg-secondary hover:bg-secondary/90 text-white"
+            onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLScExQF9XAuS3m1-RmIXYo6ocbV7sE3OKGJvuS_9VRToNdEiYw/viewform', '_blank')}
+          >
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScExQF9XAuS3m1-RmIXYo6ocbV7sE3OKGJvuS_9VRToNdEiYw/viewform" target="_blank" rel="noopener noreferrer">
+              Register for Skills
+            </a>
+          </Button>
         </div>
       </div>
     </div>
