@@ -61,7 +61,7 @@ export const SocialShareButtons = ({ onShare }: SocialShareButtonsProps) => {
     <div className="flex justify-center">
       <Button
         onClick={handleWhatsAppShare}
-        className="bg-green-500 hover:bg-green-600"
+        className="bg-green-500 hover:bg-green-600 text-white"
       >
         <MessageSquare className="w-5 h-5 mr-2" />
         Share on WhatsApp
