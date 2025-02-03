@@ -6,7 +6,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-import { JoinMovement } from "./join/JoinMovement";
 
 export const Hero = () => {
   const [events, setEvents] = useState<any[]>([]);
@@ -94,8 +93,6 @@ export const Hero = () => {
               Register for Skills
             </a>
           </Button>
-          
-          <JoinMovement />
         </div>
       </div>
     </div>
