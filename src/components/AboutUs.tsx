@@ -1,26 +1,9 @@
 import { motion } from "framer-motion";
+import { JoinMovement } from "./join/JoinMovement";
 
 export const AboutUs = () => {
-  const objectives = [
-    {
-      title: "Voter Education and Awareness",
-      description:
-        "Providing accurate and unbiased information about the electoral process, voting requirements, and the importance of participating in elections.",
-    },
-    {
-      title: "Youth Empowerment",
-      description:
-        "Encouraging young people to take an active role in shaping their future by voting and engaging in the democratic process.",
-    },
-    {
-      title: "Community Engagement",
-      description:
-        "Organizing events, workshops, and campaigns to mobilize youths, promote civic responsibility, and foster a sense of community.",
-    },
-  ];
-
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-primary/5">
+    <section className="py-16 bg-white relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,30 +11,26 @@ export const AboutUs = () => {
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">About Us</h2>
-          <p className="text-lg mb-12 text-gray-700 leading-relaxed">
-            YouthVote 2027 is a platform focused on empowering Nigerian youths to participate
-            actively in the electoral process. The mission is to educate, engage, and
-            mobilize young people to exercise their right to vote and make informed
-            decisions during the 2027 elections.
+          <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-6">About Our Movement</h2>
+          <p className="text-lg text-gray-600 mb-8">
+            We are a youth-led movement dedicated to empowering young Nigerians to actively participate in shaping the future of our nation. Through education, skill development, and community engagement, we're building a network of informed and capable leaders.
           </p>
-
-          <h3 className="text-2xl font-semibold mb-8 text-primary">Key Objectives</h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            {objectives.map((objective, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <h4 className="text-xl font-semibold mb-4 text-primary">
-                  {objective.title}
-                </h4>
-                <p className="text-gray-600">{objective.description}</p>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="p-6 bg-primary/5 rounded-lg">
+              <h3 className="text-xl font-semibold text-primary mb-3">Our Vision</h3>
+              <p className="text-gray-600">A Nigeria where youth are active participants in governance and nation-building.</p>
+            </div>
+            <div className="p-6 bg-primary/5 rounded-lg">
+              <h3 className="text-xl font-semibold text-primary mb-3">Our Mission</h3>
+              <p className="text-gray-600">To educate, empower, and mobilize Nigerian youth for positive social change.</p>
+            </div>
+            <div className="p-6 bg-primary/5 rounded-lg">
+              <h3 className="text-xl font-semibold text-primary mb-3">Our Values</h3>
+              <p className="text-gray-600">Integrity, Innovation, Inclusivity, and Impact in all we do.</p>
+            </div>
+          </div>
+          <div className="mt-8">
+            <JoinMovement />
           </div>
         </motion.div>
       </div>
