@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 
 export const Founder = () => {
@@ -13,7 +14,7 @@ export const Founder = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary">Our Vision</h2>
           <div className="bg-white rounded-lg shadow-xl p-8">
             <img
-              src="/lovable-uploads/110d24a9-d8d2-4f1f-882e-0d8be05ca020.png"
+              src="/lovable-uploads/c12e6a2c-eb16-4051-a839-b31fb232df1f.png"
               alt="Mubarak Sani Rashid"
               className="w-32 h-32 rounded-full mx-auto mb-6 object-cover"
             />
